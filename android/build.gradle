@@ -1,0 +1,79 @@
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+rootProject.buildDir = "../build"
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+subprojects {
+    project.evaluationDependsOn(":app")
+}
+
+// Ensure AGP 8+ modules (e.g., plugin libraries) have a namespace.
+// If a subproject doesn't declare `namespace`, derive it from its AndroidManifest package.
+subprojects { project ->
+    plugins.withId("com.android.application") {
+        def androidExt = project.extensions.findByName("android")
+        if (androidExt != null && androidExt.hasProperty("namespace") && androidExt.namespace == null) {
+            def manifestFile = androidExt.sourceSets.main.manifest.srcFile
+            if (manifestFile != null && manifestFile.exists()) {
+                def manifestXml = new XmlSlurper(false, false).parse(manifestFile)
+                def manifestPackage = manifestXml.@package.text()
+                if (manifestPackage) {
+                    androidExt.namespace = manifestPackage
+                }
+            }
+        }
+    }
+    plugins.withId("com.android.library") {
+        def androidExt = project.extensions.findByName("android")
+        if (androidExt != null && androidExt.hasProperty("namespace") && androidExt.namespace == null) {
+            def manifestFile = androidExt.sourceSets.main.manifest.srcFile
+            if (manifestFile != null && manifestFile.exists()) {
+                def manifestXml = new XmlSlurper(false, false).parse(manifestFile)
+                def manifestPackage = manifestXml.@package.text()
+                if (manifestPackage) {
+                    androidExt.namespace = manifestPackage
+                }
+            }
+        }
+    }
+}
+
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}
+// configurations.all {
+//     resolutionStrategy {
+//         force 'androidx.core:core-ktx:1.6.0'
+//     }
+// }
+//   // ============
+//   afterEvaluate { project ->
+//     if (project.plugins.hasPlugin("com.android.application") ||
+//       project.plugins.hasPlugin("com.android.library")) {
+//       project.android {
+//         compileSdkVersion 34
+//         buildToolsVersion "34.0.0"
+//       }
+//     }
+//     if (project.hasProperty("android")) {
+//       project.android {
+//         if (namespace == null) {
+//           namespace project.group
+//         }
+//       }
+//     }
+//   }
+//   // ============
+//   project.buildDir = "${rootProject.buildDir}/${project.name}"
+//   project.evaluationDependsOn(":app")
+
+
+// tasks.register("clean", Delete) {
+//   delete rootProject.buildDir
+// }
