@@ -1,0 +1,290 @@
+import 'dart:typed_data';
+import 'package:flutter/material.dart';
+import 'package:nutrovite/features/auth/views/widgets/auth_button.dart';
+import 'package:nutrovite/core/utils/app_colors.dart';
+import 'package:reactive_date_time_picker/reactive_date_time_picker.dart';
+import 'package:reactive_forms/reactive_forms.dart';
+
+class FamilyProfile extends StatelessWidget {
+  final FormGroup form = FormGroup({
+    'name': FormControl<String>(validators: [Validators.required]),
+    'gender': FormControl<int>(validators: [Validators.required]),
+    'status': FormControl<int>(validators: [Validators.required]),
+    'date': FormControl<DateTime>(
+      validators: [
+        Validators.required,
+      ],
+    ),
+    'profileImage': FormControl<Uint8List>(),
+  });
+
+  FamilyProfile({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
+      backgroundColor: NutroviteColor.txt,
+      body: ReactiveForm(
+        formGroup: form,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(16, 30, 16, 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 30, 0, 10),
+                  child: Image.asset('assets/images/logo.png'),
+                ),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Create Family Profile',
+                      style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w500,
+                          color: NutroviteColor.btn),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                const SizedBox(height: 20),
+                ReactiveTextField<String>(
+                  formControlName: 'name',
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: NutroviteColor.txt,
+                    labelText: 'Name',
+                    hintText: 'Name',
+                    hintStyle: const TextStyle(
+                      color: NutroviteColor.formTextfieldColor,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    enabled: true,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: NutroviteColor.borderColor,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: Colors.red,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: NutroviteColor.borderColor,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: Colors.red,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                  ),
+                  validationMessages: {
+                    ValidationMessage.required: (error) => 'Cannot be blank',
+                  },
+                ),
+                const SizedBox(height: 20),
+                ReactiveDropdownField<int>(
+                  formControlName: 'gender',
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: NutroviteColor.txt,
+                    labelText: 'Select Gender...',
+                    hintText: 'Select Gender...',
+                    hintStyle: const TextStyle(
+                      color: NutroviteColor.formTextfieldColor,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    enabled: true,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: NutroviteColor.borderColor,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: Colors.red,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: NutroviteColor.borderColor,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: Colors.red,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                  ),
+                  items: const [
+                    DropdownMenuItem(
+                      value: 0,
+                      child: Text('Male'),
+                    ),
+                    DropdownMenuItem(
+                      value: 1,
+                      child: Text('Female'),
+                    ),
+                    DropdownMenuItem(
+                      value: 2,
+                      child: Text('Other'),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                ReactiveDropdownField<int>(
+                  formControlName: 'status',
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: NutroviteColor.txt,
+                    labelText: 'Family Status...',
+                    hintText: 'Family Status...',
+                    hintStyle: const TextStyle(
+                      color: NutroviteColor.formTextfieldColor,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    enabled: true,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: NutroviteColor.borderColor,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: Colors.red,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: NutroviteColor.borderColor,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: Colors.red,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                  ),
+                  items: const [
+                    DropdownMenuItem(
+                      value: 0,
+                      child: Text('Single'),
+                    ),
+                    DropdownMenuItem(
+                      value: 1,
+                      child: Text('Married'),
+                    ),
+                    DropdownMenuItem(
+                      value: 2,
+                      child: Text('Father'),
+                    ),
+                    DropdownMenuItem(
+                      value: 3,
+                      child: Text('Mother'),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                ReactiveDateTimePicker(
+                  formControlName: 'date',
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: NutroviteColor.txt,
+                    labelText: 'Select Date...',
+                    hintText: 'Select Date...',
+                    hintStyle: const TextStyle(
+                      color: NutroviteColor.formTextfieldColor,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    enabled: true,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: NutroviteColor.borderColor,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: Colors.red,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: NutroviteColor.borderColor,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: Colors.red,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    suffixIcon: const Icon(Icons.calendar_today),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                ReactiveFormConsumer(
+                  builder: (context, form, child) {
+                    return CustomSubmitButton(
+                      onPressed: () {
+                        onSubmit(form);
+                      },
+                      label: 'Add Family Member',
+                    );
+                  },
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  void onSubmit(FormGroup form) {
+    // ignore: avoid_print
+    print('Form valid: ${form.valid}');
+    // ignore: avoid_print
+    print('Form value: ${form.value}');
+  }
+}

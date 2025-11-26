@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "282065506247",
+    "project_id": "nutrovite-7fa90",
+    "storage_bucket": "nutrovite-7fa90.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:282065506247:android:30a09165109a2f55a1d3e2",
+        "android_client_info": {
+          "package_name": "com.atx.nutrovite"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZ5yYoxJ50p5_2gGl3Fn7L6i-kvh0QpqA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:282065506247:android:bf153b68f61bcdc6a1d3e2",
+        "android_client_info": {
+          "package_name": "com.example.nutrovite"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZ5yYoxJ50p5_2gGl3Fn7L6i-kvh0QpqA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
